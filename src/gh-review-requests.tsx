@@ -114,7 +114,7 @@ export default function Command() {
 
       // Align the next refresh to this fetch
       scheduleNextRefresh(now);
-    } catch (e: any) {
+    } catch (e) {
       const msg = typeof e?.message === "string" ? e.message : "Unknown error";
       setError(msg);
       notifyError(msg);
@@ -163,8 +163,15 @@ export default function Command() {
     return () => {
       clearRefreshTimer();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cacheKey, prefs.githubToken, prefs.graphqlEndpoint, prefs.extraQuery, prefs.excludeDrafts, refreshInterval, prefs.maxItems]);
+  }, [
+    cacheKey,
+    prefs.githubToken,
+    prefs.graphqlEndpoint,
+    prefs.extraQuery,
+    prefs.excludeDrafts,
+    refreshInterval,
+    prefs.maxItems,
+  ]);
 
   const title = useMemo(() => {
     if (error) return "!";
@@ -180,8 +187,9 @@ export default function Command() {
   }, [count, error]);
 
   const searchURL = useMemo(
-    () => webSearchURL(prefs.graphqlEndpoint || "https://api.github.com/graphql", prefs.excludeDrafts, prefs.extraQuery),
-    [prefs.graphqlEndpoint, prefs.excludeDrafts, prefs.extraQuery]
+    () =>
+      webSearchURL(prefs.graphqlEndpoint || "https://api.github.com/graphql", prefs.excludeDrafts, prefs.extraQuery),
+    [prefs.graphqlEndpoint, prefs.excludeDrafts, prefs.extraQuery],
   );
 
   return (
@@ -218,8 +226,7 @@ export default function Command() {
           <MenuBarExtra.Separator />
         </>
       ) : (
-        !loading &&
-        !error && <MenuBarExtra.Item icon={Icon.Checkmark} title="No review requests" />
+        !loading && !error && <MenuBarExtra.Item icon={Icon.Checkmark} title="No review requests" />
       )}
 
       <MenuBarExtra.Item title="Open Search on GitHub" icon={Icon.Globe} onAction={() => open(searchURL)} />

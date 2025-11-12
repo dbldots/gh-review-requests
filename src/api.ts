@@ -73,7 +73,7 @@ export async function fetchReviewRequests(params: {
     data?: {
       search: {
         issueCount: number;
-        nodes: Array<any>;
+        nodes: Array;
       };
     };
     errors?: Array<{ message: string }>;
@@ -104,15 +104,18 @@ export async function fetchReviewRequests(params: {
   return { count: issueCount || items.length, items };
 }
 
-export function webSearchURL(graphqlEndpoint: string, excludeDrafts: boolean | undefined, extraQuery: string | undefined) {
+export function webSearchURL(
+  graphqlEndpoint: string,
+  excludeDrafts: boolean | undefined,
+  extraQuery: string | undefined,
+) {
   // Convert GraphQL endpoint to web host root
   // Examples:
   // - https://api.github.com/graphql -> https://github.com
   // - https://github.myco.com/api/graphql -> https://github.myco.com
   const url = new URL(graphqlEndpoint);
   // api.github.com -> github.com
-  const host =
-    url.hostname === "api.github.com" ? "github.com" : url.hostname;
+  const host = url.hostname === "api.github.com" ? "github.com" : url.hostname;
   const origin = `${url.protocol}//${host}`;
 
   const q = encodeURIComponent(buildQuery(!!excludeDrafts, extraQuery));

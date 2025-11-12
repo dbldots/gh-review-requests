@@ -1,10 +1,10 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "gh-review-requests",
-  "title": "GitHub PR review requests",
+  "title": "GitHub PR Review Requests",
   "description": "Reads pending review requests assigned to you periodically and reveals them in the menu bar",
   "icon": "extension-icon.png",
-  "author": "Johannes-Kostas Goetzinger",
+  "author": "mfx-johannes",
   "platforms": [
     "macOS",
     "Windows"
@@ -13,7 +13,7 @@
   "commands": [
     {
       "name": "gh-review-requests",
-      "title": "GitHub PR review requests",
+      "title": "GitHub PR Review Requests",
       "description": "Reads pending review requests assigned to you periodically and reveals them in the menu bar",
       "mode": "menu-bar",
       "preferences": [
